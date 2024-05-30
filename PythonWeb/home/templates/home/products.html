@@ -1,0 +1,124 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'product/fonts/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'product/Pretty-Product-List-.css' %}">
+<link rel="stylesheet" href="{% static 'product/Pretty-Product-Grid-images.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Product List</h1>
+    <div class="row">
+
+
+    </div>
+
+    <div class="row product-list">
+
+
+        {% for product in products %}
+            <div class="col-sm-6 col-md-4 product-item">
+                <div class="product-container">
+                    <div class="row">
+                        <div class="col-md-12"><a class="product-image" href="#"><img
+                                src="{{ product.image.url }}"></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <h2><a href="#">{{ product.name }}</a></h2>
+                        </div>
+                        <div class="col-4"><a class="small-text" href="#">compare </a></div>
+                    </div>
+                    <div class="product-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                            class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i><a
+                            class="small-text" href="#">82 reviews</a></div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="product-description">{{ product.description }} </p>
+                            <div class="row">
+                                <div class="col-6">
+
+                                    <a href="#" class="add-to-cart btn btn-light"data-toast-target="#liveToast-{{ product.id }}"
+                                       data-product-id="{{ product.id }}">
+                                        Buy Now!
+                                    </a>
+                                    <div class="toast-container position-fixed bottom-0 start-0 p-6">
+                                        <div class="toast" id="liveToast-{{ product.id }}" role="alert"
+                                             aria-live="assertive" aria-atomic="true">
+                                            <div class="toast-body">
+                                                <div class="d-flex gap-4">
+                                                    <span><i
+                                                            class="fa-solid fa-circle-check fa-lg icon-success"></i></span>
+                                                    <div class="d-flex flex-column flex-grow-1 gap-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="fw-semibold">{{ product.name }} added to cart</span>
+                                                            <button type="button" class="btn-close btn-close-sm ms-auto"
+                                                                    data-bs-dismiss="toast" aria-label="Close"></button>
+                                                        </div>
+                                                        <span>I will auto dismiss after 8 seconds.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-6">
+                                    <p class="product-price">{{ product.price }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+    document.querySelectorAll('[data-toast-target]').forEach(button => {
+        button.addEventListener('click', () => {
+            const toastElement = document.getElementById(button.dataset.toastTarget.slice(1));
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+        });
+    });
+
+</script>
+
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'product/js/bs-init.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".add-to-cart").click(function (e) {
+            e.preventDefault();
+            var product_id = $(this).data("product-id");
+            console.log(product_id);
+            $.ajax({
+                url: `http://127.0.0.1:8000/add_to_cart/ajax/add_to_cart/${product_id}/`,
+                data: {
+                    'product_id': product_id,
+                    'csrfmiddlewaretoken': '{{ csrf_token }}'
+                },
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.success) {
+                        // Update the cart on the page
+                        {#$(".hidden").className = "block";#}
+                        console.log("SUCCESS")
+                        {#${'#toastAddToCart'}.toast('show');#}
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+

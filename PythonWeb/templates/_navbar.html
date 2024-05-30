@@ -1,0 +1,97 @@
+{% load static %}
+{% load category_tag %}
+<div class="container-fluid">
+    <div class="title-one" style="background-color:url({% static 'images/banner.jpg' %});">
+        <img style="width: 100px;" src="{% static 'images/logodh1.svg' %}">
+
+    </div>
+    <div class="logout1" style="position: absolute;top: 10px; right: 100px;">
+
+        {% if user.is_authenticated %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"></path>
+                <path fill-rule="evenodd"
+                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"></path>
+            </svg>
+            {{ user.username }}
+
+            <li class="no-bullet"
+                style=" list-style-type: none;background: #0066CC;text-align: center;border-radius: 5px;">
+                <a class="btn btn-primary" href="{% url 'home:logout' %}" style="text-decoration: none;color:black ">Log
+                    out</a>
+            </li>
+
+        {% else %}
+            <li class="nav-item"
+                style="list-style-type: none;background: #0066CC;text-align: center;border-radius: 5px;">
+                <a class="btn btn-primary" aria-current="page" href="{% url 'home:login' %}">ĐĂNG NHẬP</a>
+            </li>
+        {% endif %}
+    </div>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home:base' %}">DH Store</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {#                    <li class="nav-item">#}
+                    {#                        <a class="nav-link active" aria-current="page" href="{% url 'home:base' %}">TRANG CHỦ</a>#}
+                    {#                    </li>#}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'product:product_list' %}">SẢN PHẨM</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">QUẦY
+                            HÀNG</a>
+                        <ul class="dropdown-menu">
+                            {% get_categories as categories %}
+                            {% for category in categories %}
+
+
+                                <li><a class="dropdown-item" href="{% url 'product:product_by_category' category.id %}">{{ category.name }}</a></li>
+{#                                <li><a class="dropdown-item" href="#">HÀNG TRÁI CÂY</a></li>#}
+{#                                <li><a class="dropdown-item" href="#">HÀNG QUẦN ÁO</a></li>#}
+{#                                <li><a class="dropdown-item" href="#">HÀNG GIÀY</a></li>#}
+{#                                <li><a class="dropdown-item" href="#">HÀNG TRANG SỨC</a></li>#}
+                            {% endfor %}
+
+                        </ul>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://wikicacanh.com/">GIỚI THIỆU</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">SỰ KIỆN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">ƯU ĐÃI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">LIÊN HỆ</a>
+                    </li>
+                    <a type="button" class="btn btn-outline-danger d-flex align-items-center" fdprocessedid="dy9cdj"
+                       href="{% url 'add_to_cart:view_cart' %}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"></path>
+                        </svg>
+                        Giỏ Hàng
+                    </a>
+
+                </ul>
+                <form class="d-flex" role="search" action="{% url 'product:search' %}" method="get">
+                    {% csrf_token %}
+                    <input class="form-control me-2" type="search" placeholder="Search" name="search"
+                           aria-label="Search"/>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>

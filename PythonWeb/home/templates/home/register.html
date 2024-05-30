@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+<div style="text-align: center;">
+    <form method='POST' class="formedit">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value='Đăng kí'/>
+        <p>Already have an account? <a href="{% url "home:login" %}">Sign in</a></p>
+    </form>
+</div>
+</body>
+</html>

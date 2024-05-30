@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+
+{% block content %}
+    {% include 'home/_slider.html' %}
+    {% include "home/products.html" with products=products %}
+    
+    {% if user.is_superuser %}
+        <div class="button_add_product mx-auto"
+             style="background-color: darkgray;width: 100px;text-align: center;border-radius: 3px ">
+            <a href="{% url "product:add_product" %}" style="text-decoration: none;">Add Product</a>
+        </div>
+    {% endif %}
+
+
+    {% include 'home/introduce.html' %}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'product/fonts/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'product/Pretty-Product-List-.css' %}">
+<link rel="stylesheet" href="{% static 'product/Pretty-Product-Grid-images.css' %}">
+
+
+<div class="container my-5">
+    <h1 class="text-center mb-4">Endow List</h1>
+    <div class="row">
+        <!-- Replace with your actual product data -->
+
+        {#      <div class="col-md-6 col-lg-4 mb-4">#}
+        {#        <div class="card">#}
+        {#          <img src="{{ product.image.url }}" class="card-img-top" alt="Product Image">#}
+        {#          <div class="card-body">#}
+        {#            <h5 class="card-title">{{ product.name }}</h5>#}
+        {#            <p class="card-text">{{ product.description }}</p>#}
+        {#            <p class="card-text font-weight-bold">{{ product.price }}</p>#}
+        {#            <a href="{% url "home:add-to-cart" product_id=product.id %}" class="btn btn-primary">Add to Cart</a>#}
+        {#          </div>#}
+        {#        </div>#}
+        {#      </div>#}
+{#        {% include 'product/index.html' with product=product %}#}
+        <!-- Repeat the above code for each product -->
+    </div>
+
+    <div class="row product-list">
+        {% for product in products %}
+            <div class="col-sm-6 col-md-4 product-item">
+                <div class="product-container">
+                    <div class="row">
+                        <div class="col-md-12"><a class="product-image" href="#"><img
+                                src="{{ product.image.url }}"></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <h2><a href="#">{{ product.name }}</a></h2>
+                        </div>
+                        <div class="col-4"><a class="small-text" href="#">compare </a></div>
+                    </div>
+                    <div class="product-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i
+                            class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i><a
+                            class="small-text" href="#">82 reviews</a></div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam
+                                ornare sem sed nisl dignissim, facilisis dapibus lacus vulputate. Sed lacinia lacinia
+                                magna. </p>
+                            <div class="row">
+                                <div class="col-6">
+                                    <button class="btn btn-light" type="button">Buy Now!</button>
+                                </div>
+                                <div class="col-6">
+                                    <p class="product-price">{{ product.price }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+

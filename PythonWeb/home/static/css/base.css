@@ -1,0 +1,11 @@
+.title-one h1{
+    text-align: center;
+    color: #228B22;
+  }
+  
+  .title-one h1 {
+    display: inline-block; /* Đảm bảo chỉ chiếm chiều rộng cần thiết */
+  }
+.no-bullet {
+     list-style-type: none;
+ }
