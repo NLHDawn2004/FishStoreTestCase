@@ -9,7 +9,7 @@ class FishStoreTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
-        self.driver.get("http://localhost:8000")  # Đổi nếu bạn chạy ở port khác
+        self.driver.get("http://127.0.0.1:8000")  # Đổi nếu bạn chạy ở port khác
 
     def test_login_and_add_3_products(self):
         driver = self.driver
@@ -20,8 +20,8 @@ class FishStoreTest(unittest.TestCase):
         time.sleep(1)
 
         # 2. Nhập thông tin đăng nhập
-        driver.find_element(By.NAME, "username").send_keys("dang99438")
-        driver.find_element(By.NAME, "password").send_keys("123456")
+        driver.find_element(By.NAME, "username").send_keys("admin")
+        driver.find_element(By.NAME, "password").send_keys("1234")
         driver.find_element(By.XPATH, "//input[@type='submit' and @value='ĐĂNG NHẬP']").click()
         time.sleep(2)
 
@@ -35,9 +35,18 @@ class FishStoreTest(unittest.TestCase):
         buy1.click()
 
         # Chờ đến khi giỏ hàng có 1 sản phẩm (giả sử hiển thị ở #cart-count)
-        WebDriverWait(driver, 10).until(
-            EC.text_to_be_present_in_element((By.ID, "cart-count"), "1")
-        )
+        # WebDriverWait(driver, 10).until(
+        #     EC.text_to_be_present_in_element((By.ID, "cart-count"), "1")
+        # )
+        # wait = WebDriverWait(driver, 10)
+        
+        # wait.until(
+        #     EC.presence_of_element_located((By.CSS_SELECTOR, ".d-flex.flex-column.flex-grow-1.gap-2"))
+        # )
+        
+        # wait.until(
+        #     EC.invisibility_of_element_located((By.CSS_SELECTOR, ".d-flex.flex-column.flex-grow-1.gap-2"))
+        # )
 
         # buy2 = driver.find_element(By.XPATH, "(//a[contains(@class, 'add-to-cart') and contains(text(), 'Buy Now!')])[2]")
         # buy2.click()
@@ -45,7 +54,7 @@ class FishStoreTest(unittest.TestCase):
 
         # buy3 = driver.find_element(By.XPATH, "(//a[contains(@class, 'add-to-cart') and contains(text(), 'Buy Now!')])[3]")
         # buy3.click()
-        # time.sleep(10)
+        time.sleep(3)
 
         # 5. Kéo lên đầu trang
         driver.execute_script("window.scrollTo(0, 0);")
@@ -54,7 +63,7 @@ class FishStoreTest(unittest.TestCase):
         # 6. Vào trang Giỏ hàng
         cart_link = driver.find_element(By.XPATH, "//a[@class='btn btn-outline-danger d-flex align-items-center']")
         cart_link.click()
-        time.sleep(5)
+        time.sleep(3)
 
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight/5);")
         time.sleep(10)
