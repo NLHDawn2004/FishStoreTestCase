@@ -11,7 +11,7 @@ class RegisterFailTest(unittest.TestCase):
 
     def test_password_mismatch(self):
         driver = self.driver
-        driver.get("http://localhost:8000/")
+        driver.get("http://127.0.0.1:8000")
 
          # 1. Bấm vào nút Đăng nhập
         login_button = driver.find_element(By.XPATH, "//a[text()='ĐĂNG NHẬP']")

@@ -65,7 +65,7 @@ class FishStoreTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
-        self.driver.get("http://localhost:8000")  # Đổi nếu bạn chạy ở port khác
+        self.driver.get("http://127.0.0.1:8000")  # Đổi nếu bạn chạy ở port khác
 
     def test_login_and_add_3_products(self):
         driver = self.driver

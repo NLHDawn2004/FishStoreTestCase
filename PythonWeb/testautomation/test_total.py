@@ -33,27 +33,14 @@ class FishStoreTest(unittest.TestCase):
         # Click vào nút Buy Now! đầu tiên
         buy1 = driver.find_element(By.XPATH, "(//a[contains(@class, 'add-to-cart') and contains(text(), 'Buy Now!')])[1]")
         buy1.click()
+        time.sleep(3)
 
-        # Chờ đến khi giỏ hàng có 1 sản phẩm (giả sử hiển thị ở #cart-count)
-        # WebDriverWait(driver, 10).until(
-        #     EC.text_to_be_present_in_element((By.ID, "cart-count"), "1")
-        # )
-        # wait = WebDriverWait(driver, 10)
-        
-        # wait.until(
-        #     EC.presence_of_element_located((By.CSS_SELECTOR, ".d-flex.flex-column.flex-grow-1.gap-2"))
-        # )
-        
-        # wait.until(
-        #     EC.invisibility_of_element_located((By.CSS_SELECTOR, ".d-flex.flex-column.flex-grow-1.gap-2"))
-        # )
+        buy2 = driver.find_element(By.XPATH, "(//a[contains(@class, 'add-to-cart') and contains(text(), 'Buy Now!')])[2]")
+        buy2.click()
+        time.sleep(3)
 
-        # buy2 = driver.find_element(By.XPATH, "(//a[contains(@class, 'add-to-cart') and contains(text(), 'Buy Now!')])[2]")
-        # buy2.click()
-        # time.sleep(10)
-
-        # buy3 = driver.find_element(By.XPATH, "(//a[contains(@class, 'add-to-cart') and contains(text(), 'Buy Now!')])[3]")
-        # buy3.click()
+        buy3 = driver.find_element(By.XPATH, "(//a[contains(@class, 'add-to-cart') and contains(text(), 'Buy Now!')])[3]")
+        buy3.click()
         time.sleep(3)
 
         # 5. Kéo lên đầu trang

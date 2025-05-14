@@ -8,7 +8,7 @@ class FishStoreTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()  # Hoặc Firefox, Edge tùy bạn
         self.driver.maximize_window()
-        self.driver.get("http://localhost:8000")  # URL của project FishStore bạn đang chạy
+        self.driver.get("http://127.0.0.1:8000")  # URL của project FishStore bạn đang chạy
 
     def test_user_signup_login_add_to_cart(self):
         driver = self.driver

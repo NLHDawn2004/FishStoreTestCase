@@ -8,7 +8,7 @@ class FishStoreTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome() 
         self.driver.maximize_window()
-        self.driver.get("http://localhost:8000")  
+        self.driver.get("http://127.0.0.1:8000")  
 
     def test_user_signup_login_add_to_cart(self):
         driver = self.driver
@@ -17,8 +17,8 @@ class FishStoreTest(unittest.TestCase):
         login_button.click()
         time.sleep(1)
         
-        driver.find_element(By.NAME, "username").send_keys("user1")
-        driver.find_element(By.NAME, "password").send_keys("user12333")
+        driver.find_element(By.NAME, "username").send_keys("dang99438")
+        driver.find_element(By.NAME, "password").send_keys("123456")
         driver.find_element(By.XPATH, "//input[@type='submit' and @value='ĐĂNG NHẬP']").click()
         time.sleep(2)
 
